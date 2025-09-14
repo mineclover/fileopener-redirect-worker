@@ -72,6 +72,8 @@ https://your-domain.com/myProject/src/readme.md
 To handle `fopen://` URLs on your system, you'll need a protocol handler application.
 See [url-fileopener](https://github.com/mineclover/url-fileopener) for the actual protocol handler implementation.
 
+**Note**: This project has not been tested on Windows or other operating systems yet. Testing and contributions for cross-platform compatibility are welcome.
+
 ## Features
 
 - Automatic protocol conversion
