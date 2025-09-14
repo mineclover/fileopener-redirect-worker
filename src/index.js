@@ -2,29 +2,44 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // Parse the URL path to extract projectName and filePath
-    // Expected format: /fileopener/<projectName>/path/to/file
-    const pathMatch = url.pathname.match(/^\/fileopener\/([^\/]+)\/(.+)$/);
+    let projectName, filePath;
 
-    if (!pathMatch) {
-      return new Response(`
-        <html>
-          <head><title>Invalid URL Format</title></head>
-          <body>
-            <h1>Invalid URL Format</h1>
-            <p>Expected format: <code>&lt;domain.url&gt;/fileopener/&lt;projectName&gt;/path/to/file</code></p>
-            <p>Example: <code>https://your-domain.com/fileopener/myProject/src/readme.md</code></p>
-          </body>
-        </html>
-      `, {
-        status: 400,
-        headers: {
-          'Content-Type': 'text/html',
-        },
-      });
+    // Try preferred format first: /fileopener/<projectName>/path/to/file
+    let pathMatch = url.pathname.match(/^\/fileopener\/([^\/]+)\/(.+)$/);
+
+    if (pathMatch) {
+      [, projectName, filePath] = pathMatch;
+    } else {
+      // Fallback: treat the entire path as /<projectName>/path/to/file
+      pathMatch = url.pathname.match(/^\/([^\/]+)\/(.+)$/);
+
+      if (pathMatch) {
+        [, projectName, filePath] = pathMatch;
+      } else {
+        // If still no match, show error with better guidance
+        return new Response(`
+          <html>
+            <head><title>Invalid URL Format</title></head>
+            <body>
+              <h1>Invalid URL Format</h1>
+              <p><strong>Preferred format:</strong> <code>${url.origin}/fileopener/&lt;projectName&gt;/path/to/file</code></p>
+              <p><strong>Alternative format:</strong> <code>${url.origin}/&lt;projectName&gt;/path/to/file</code></p>
+              <p><strong>Examples:</strong></p>
+              <ul>
+                <li><code>${url.origin}/fileopener/myProject/src/readme.md</code></li>
+                <li><code>${url.origin}/myProject/src/readme.md</code></li>
+              </ul>
+              <p><strong>Current URL:</strong> <code>${url.href}</code></p>
+            </body>
+          </html>
+        `, {
+          status: 400,
+          headers: {
+            'Content-Type': 'text/html',
+          },
+        });
+      }
     }
-
-    const [, projectName, filePath] = pathMatch;
 
     // Create the fileopener:// protocol URL
     const redirectUrl = `fileopener://${projectName}/${filePath}`;
