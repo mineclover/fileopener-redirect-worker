@@ -1,14 +1,14 @@
-name = "fileopener-redirect"
+name = "fopen-redirect"
 main = "src/index.js"
 compatibility_date = "2024-09-14"
 
 # Optional: Configure custom domain route when you have a domain
 # [[routes]]
-# pattern = "your-domain.com/fileopener/*"
+# pattern = "your-domain.com/*"
 # zone_name = "your-domain.com"
 
 [env.production]
-name = "fileopener-redirect-prod"
+name = "fopen-redirect-prod"
 
 [env.development]
-name = "fileopener-redirect-dev"
+name = "fopen-redirect-dev"

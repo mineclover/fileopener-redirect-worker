@@ -1,11 +1,11 @@
-# Fileopener Redirect Worker
+# Fopen Redirect Worker
 
-Cloudflare Worker that redirects HTTP URLs to `fileopener://` protocol.
+Cloudflare Worker that redirects HTTP URLs to `fopen://` protocol.
 
 ## URL Format Conversion
 
-**Before**: `<domain.url>/fileopener/<projectName>/src/readme.md`
-**After**: `fileopener://<projectName>/src/readme.md`
+**Before**: `<domain.url>/<projectName>/src/readme.md`
+**After**: `fopen://<projectName>/src/readme.md`
 
 ## Setup
 
@@ -17,7 +17,7 @@ npm install
 2. Update your domain in `wrangler.toml`:
 ```toml
 [[routes]]
-pattern = "your-domain.com/fileopener/*"
+pattern = "your-domain.com/*"
 zone_name = "your-domain.com"
 ```
 
@@ -41,13 +41,41 @@ npm run tail
 
 ## Usage
 
-Visit: `https://your-domain.com/fileopener/myProject/src/readme.md`
+Visit: `https://your-domain.com/myProject/src/readme.md`
 
-The worker will redirect to: `fileopener://myProject/src/readme.md`
+The worker will redirect to: `fopen://myProject/src/readme.md`
+
+## How It Works
+
+This Cloudflare Worker acts as a bridge between web browsers and the `fopen://` custom protocol:
+
+1. **HTTP to Protocol Conversion**: Converts standard HTTP URLs to custom `fopen://` protocol URLs
+2. **Instant Redirect**: Uses HTTP 302 redirect for seamless protocol handoff
+3. **Browser Integration**: Works with custom protocol handlers registered in the operating system
+
+### Redirect Flow
+
+```
+https://your-domain.com/myProject/src/readme.md
+                    ↓
+              302 Redirect
+                    ↓
+        fopen://myProject/src/readme.md
+                    ↓
+           OS Protocol Handler
+                    ↓
+         Opens file in editor
+```
+
+## Protocol Handler Setup
+
+To handle `fopen://` URLs on your system, you'll need a protocol handler application.
+See [url-fileopener](https://github.com/mineclover/url-fileopener) for the actual protocol handler implementation.
 
 ## Features
 
 - Automatic protocol conversion
-- HTML fallback with manual link
+- Instant HTTP 302 redirects
 - Error handling for invalid URLs
 - Cross-browser compatibility
+- Clean, simple URL format
