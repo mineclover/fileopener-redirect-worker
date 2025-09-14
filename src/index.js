@@ -44,35 +44,11 @@ export default {
     // Create the fileopener:// protocol URL
     const redirectUrl = `fileopener://${projectName}/${filePath}`;
 
-    // Return HTML page that triggers the custom protocol
-    return new Response(`
-      <html>
-        <head>
-          <title>Redirecting to File Opener</title>
-          <meta http-equiv="refresh" content="0; url=${redirectUrl}">
-        </head>
-        <body>
-          <h1>Redirecting...</h1>
-          <p>If automatic redirect doesn't work, click: <a href="${redirectUrl}">Open in File Opener</a></p>
-          <script>
-            // Try to open the custom protocol immediately
-            window.location.href = "${redirectUrl}";
-
-            // Fallback message after 3 seconds
-            setTimeout(function() {
-              document.body.innerHTML = \`
-                <h1>Protocol Handler Required</h1>
-                <p>To open this file, you need to have a file opener application installed that handles the <code>fileopener://</code> protocol.</p>
-                <p>Target URL: <code>${redirectUrl}</code></p>
-              \`;
-            }, 3000);
-          </script>
-        </body>
-      </html>
-    `, {
-      status: 200,
+    // Direct redirect (no page opens) - most seamless experience
+    return new Response(null, {
+      status: 302,
       headers: {
-        'Content-Type': 'text/html',
+        'Location': redirectUrl,
       },
     });
   },

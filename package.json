@@ -11,10 +11,16 @@
     "preview": "wrangler preview",
     "tail": "wrangler tail"
   },
-  "keywords": ["cloudflare", "worker", "redirect", "fileopener", "protocol-handler"],
+  "keywords": [
+    "cloudflare",
+    "worker",
+    "redirect",
+    "fileopener",
+    "protocol-handler"
+  ],
   "author": "",
   "license": "MIT",
   "devDependencies": {
-    "wrangler": "^3.0.0"
+    "wrangler": "^4.36.0"
   }
 }
