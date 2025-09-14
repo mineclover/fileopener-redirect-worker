@@ -1,0 +1,20 @@
+{
+  "name": "fileopener-redirect-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker to redirect HTTP URLs to fileopener:// protocol",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "dev:local": "wrangler dev --local",
+    "deploy": "wrangler deploy",
+    "deploy:prod": "wrangler deploy --env production",
+    "preview": "wrangler preview",
+    "tail": "wrangler tail"
+  },
+  "keywords": ["cloudflare", "worker", "redirect", "fileopener", "protocol-handler"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

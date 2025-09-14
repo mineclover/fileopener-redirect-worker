@@ -1,0 +1,48 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output
+dist/
+.worker.js
+.output/
+
+# Environment files
+.env
+.env.local
+.env.production.local
+.env.test.local
+
+# Runtime data
+.DS_Store
+*.log
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+.nyc_output
+
+# Wrangler files
+.wrangler/
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS generated files
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+
+# Package lock files (keep one)
+# package-lock.json
+# yarn.lock
