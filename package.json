@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "wrangler dev",
     "dev:local": "wrangler dev --local",
-    "deploy": "wrangler deploy",
+    "deploy": "wrangler deploy:dev",
     "deploy:prod": "wrangler deploy --env production",
     "preview": "wrangler preview",
     "tail": "wrangler tail"

@@ -1,4 +1,4 @@
-name = "fopen-redirect"
+name = "fileopener-redirect"
 main = "src/index.js"
 compatibility_date = "2024-09-14"
 
@@ -7,8 +7,13 @@ compatibility_date = "2024-09-14"
 # pattern = "your-domain.com/*"
 # zone_name = "your-domain.com"
 
-[env.production]
-name = "fopen-redirect-prod"
+
 
 [env.development]
-name = "fopen-redirect-dev"
+name = "fileopener-redirect"
+workers_dev = true
+
+# Optional: Add KV storage if you need to store data
+# [[kv_namespaces]]
+# binding = "MY_KV_NAMESPACE"
+# id = "your-kv-namespace-id"

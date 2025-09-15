@@ -69,8 +69,53 @@ https://your-domain.com/myProject/src/readme.md
 
 ## Protocol Handler Setup
 
-To handle `fopen://` URLs on your system, you'll need a protocol handler application.
-See [url-fileopener](https://github.com/mineclover/url-fileopener) for the actual protocol handler implementation.
+To handle `fopen://` URLs on your system, you'll need to install and configure a protocol handler application.
+
+### 🔧 Install Protocol Handler
+
+Use the [url-fileopener](https://github.com/mineclover/url-fileopener) project to register the `fopen://` protocol:
+
+1. **Clone the repository**:
+```bash
+git clone https://github.com/mineclover/url-fileopener.git
+cd url-fileopener
+```
+
+2. **Install dependencies**:
+```bash
+pnpm install
+```
+
+3. **Build the project**:
+```bash
+pnpm build
+```
+
+4. **Register the protocol handler**:
+```bash
+# The url-fileopener will register the fopen:// protocol
+# Follow the installation instructions in their README
+```
+
+### 📋 What url-fileopener Does
+
+The [url-fileopener](https://github.com/mineclover/url-fileopener) project provides:
+
+- **Protocol Registration**: Registers `fopen://` as a custom URL scheme
+- **File Opening**: Opens files in your preferred editor/application
+- **Cross-platform Support**: Works on macOS, Linux, and Windows
+- **TypeScript CLI**: Fully typed command-line interface with Effect.js
+
+### 🔗 Integration Flow
+
+```
+Web Browser → Cloudflare Worker → fopen:// URL → url-fileopener → File Editor
+```
+
+1. **Web Browser**: User clicks a link like `https://your-domain.com/project/file.js`
+2. **Cloudflare Worker**: Redirects to `fopen://project/file.js`
+3. **url-fileopener**: Receives the protocol URL and opens the file
+4. **File Editor**: File opens in your configured editor (VS Code, Vim, etc.)
 
 **Note**: This project has not been tested on Windows or other operating systems yet. Testing and contributions for cross-platform compatibility are welcome.
 
