@@ -1,6 +1,7 @@
 {
   "name": "fileopener-redirect-worker",
   "version": "1.0.0",
+  "type": "module",
   "description": "Cloudflare Worker to redirect HTTP URLs to fileopener:// protocol",
   "main": "src/index.js",
   "scripts": {
