@@ -26,8 +26,19 @@ export default {
 
     const [, projectName, filePath] = pathMatch;
 
-    // Create the fileopener:// protocol URL
-    const redirectUrl = `fileopener://${projectName}/${filePath}`;
+    const encodePathSegment = (segment) => {
+      try {
+        return encodeURIComponent(decodeURIComponent(segment));
+      } catch {
+        return encodeURIComponent(segment);
+      }
+    };
+
+    // Create a protocol URL that is safe to embed in HTML and JavaScript.
+    const redirectUrl = `fileopener://${encodePathSegment(projectName)}/${filePath
+      .split('/')
+      .map(encodePathSegment)
+      .join('/')}`;
 
     // Return HTML page that triggers the custom protocol
     return new Response(`

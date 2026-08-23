@@ -5,6 +5,7 @@
   "description": "Cloudflare Worker to redirect HTTP URLs to fileopener:// protocol",
   "main": "src/index.js",
   "scripts": {
+    "test": "node --test",
     "dev": "wrangler dev",
     "dev:local": "wrangler dev --local",
     "deploy": "wrangler deploy",
